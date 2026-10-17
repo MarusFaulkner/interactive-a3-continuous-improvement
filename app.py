@@ -74,16 +74,7 @@ st.write(
     "attempting to identify the root cause."
 )
 
-failure_type = st.selectbox(
-    "Most Common Failure Observed",
-    [
-        "Functional Test Failure",
-        "Connector Alignment Issue",
-        "Fastener Torque Failure",
-        "Cosmetic Defect",
-        "Labeling / Documentation Error"
-    ]
-)
+
 
 col1, col2 = st.columns(2)
 
@@ -103,6 +94,88 @@ with col2:
         step=1
     )
 
+st.subheader("Failure Data")
+
+col1, col2, col3 = st.columns(3)
+
+with col1:
+    functional_failures = st.number_input(
+        "Functional Test Failures",
+        min_value=0,
+        value=8,
+        step=1
+    )
+
+    connector_failures = st.number_input(
+        "Connector Alignment Issues",
+        min_value=0,
+        value=4,
+        step=1
+    )
+
+st.subheader("Failure Data")
+
+col1, col2, col3 = st.columns(3)
+
+with col1:
+    functional_failures = st.number_input(
+        "Functional Test Failures",
+        min_value=0,
+        value=8,
+        step=1
+    )
+
+    connector_failures = st.number_input(
+        "Connector Alignment Issues",
+        min_value=0,
+        value=4,
+        step=1
+    )
+
+with col2:
+    torque_failures = st.number_input(
+        "Fastener Torque Failures",
+        min_value=0,
+        value=3,
+        step=1
+    )
+
+    cosmetic_failures = st.number_input(
+        "Cosmetic Defects",
+        min_value=0,
+        value=2,
+        step=1
+    )
+
+with col3:
+    documentation_failures = st.number_input(
+        "Labeling / Documentation Errors",
+        min_value=0,
+        value=1,
+        step=1
+    )
+with col2:
+    torque_failures = st.number_input(
+        "Fastener Torque Failures",
+        min_value=0,
+        value=3,
+        step=1
+    )
+
+    cosmetic_failures = st.number_input(
+        "Cosmetic Defects",
+        min_value=0,
+        value=2,
+        step=1
+    )
+
+with col3:
+    documentation_failures = st.number_input(
+        "Labeling / Documentation Errors",
+        min_value=0,
+        value=1,
+        step=1
+    )
 failure_rate = (units_failed / units_inspected) * 100
 
 st.subheader("Observed Performance")
