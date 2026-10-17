@@ -26,3 +26,41 @@ st.write(
     "Problem → Current Condition → Root Cause → Countermeasures → "
     "Implementation → Results → Standardize & Sustain"
 )
+
+st.divider()
+
+st.header("1. Define the Problem")
+
+st.write(
+    "A synthetic medical-device final assembly process is experiencing "
+    "an increase in units failing final functional inspection."
+)
+
+col1, col2 = st.columns(2)
+
+with col1:
+    target_fpy = st.number_input(
+        "Target First-Pass Yield (%)",
+        min_value=0.0,
+        max_value=100.0,
+        value=98.0,
+        step=0.1
+    )
+
+with col2:
+    current_fpy = st.number_input(
+        "Current First-Pass Yield (%)",
+        min_value=0.0,
+        max_value=100.0,
+        value=91.0,
+        step=0.1
+    )
+
+gap = target_fpy - current_fpy
+
+st.subheader("Performance Gap")
+
+st.metric(
+    "FPY Gap",
+    f"{gap:.1f} percentage points"
+)
