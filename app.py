@@ -64,3 +64,54 @@ st.metric(
     "FPY Gap",
     f"{gap:.1f} percentage points"
 )
+
+st.divider()
+
+st.header("2. Current Condition")
+
+st.write(
+    "Document what is currently happening in the process before "
+    "attempting to identify the root cause."
+)
+
+failure_type = st.selectbox(
+    "Most Common Failure Observed",
+    [
+        "Functional Test Failure",
+        "Connector Alignment Issue",
+        "Fastener Torque Failure",
+        "Cosmetic Defect",
+        "Labeling / Documentation Error"
+    ]
+)
+
+col1, col2 = st.columns(2)
+
+with col1:
+    units_inspected = st.number_input(
+        "Units Inspected",
+        min_value=1,
+        value=200,
+        step=1
+    )
+
+with col2:
+    units_failed = st.number_input(
+        "Units Failed",
+        min_value=0,
+        value=18,
+        step=1
+    )
+
+failure_rate = (units_failed / units_inspected) * 100
+
+st.subheader("Observed Performance")
+
+st.metric(
+    "Observed Failure Rate",
+    f"{failure_rate:.1f}%"
+)
+
+st.write(
+    f"Most common observed failure: **{failure_type}**"
+)
