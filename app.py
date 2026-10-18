@@ -302,3 +302,9 @@ st.info(
     "A strong countermeasure changes or controls the process. "
     "Avoid actions that only address the symptom."
 )
+
+countermeasure = st.text_area(
+    "Proposed Countermeasure",
+    placeholder="Describe an action that directly addresses the potential root cause...",
+    key="countermeasure"
+)
