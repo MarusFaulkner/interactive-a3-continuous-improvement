@@ -238,6 +238,13 @@ why_5 = st.text_area(
     key="why_5"
 )
 
+current_whys = {
+    "why_1": why_1,
+    "why_2": why_2,
+    "why_3": why_3,
+    "why_4": why_4,
+    "why_5": why_5
+}
 st.divider()
 
 st.subheader("5 Whys Flow Validation")
