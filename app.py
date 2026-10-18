@@ -84,6 +84,18 @@ device_under_test = st.selectbox(
     ]
 )
 
+specific_failure = st.selectbox(
+    "Specific Functional Failure",
+    [
+        "Monopolar Output Failure",
+        "Bipolar Output Failure",
+        "Neutral Electrode Interface Failure",
+        "Cable / Connection Failure",
+        "Output Power Below Specification",
+        "Output Power Above Specification",
+        "Spark Test Failure"
+    ]
+)
 col1, col2 = st.columns(2)
 
 with col1:
