@@ -250,6 +250,8 @@ earlier_why_changed = any(
     and st.session_state.previous_whys[key] != current_whys[key]
     for key in ["why_1", "why_2", "why_3", "why_4"]
 )
+if earlier_why_changed:
+    st.session_state.whys_confirmed = False
 st.divider()
 
 st.subheader("5 Whys Flow Validation")
