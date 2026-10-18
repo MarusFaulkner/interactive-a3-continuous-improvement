@@ -143,6 +143,14 @@ failure_data = {
     "Cosmetic Defect": cosmetic_failures,
     "Labeling / Documentation Error": documentation_failures
 }
+
+categorized_failures = sum(failure_data.values())
+
+if categorized_failures != units_failed:
+    st.warning(
+        f"Failure count mismatch: {categorized_failures} categorized failures "
+        f"do not match {units_failed} total units failed."
+    )
 leading_failure = max(failure_data, key=failure_data.get)
 
 failure_rate = (units_failed / units_inspected) * 100
