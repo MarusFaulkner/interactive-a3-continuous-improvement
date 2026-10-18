@@ -284,14 +284,14 @@ if all([
     why_4.strip(),
     why_5.strip()
 ]):
-    if st.button(
+       if st.button(
         "Confirm 5 Whys Chain",
         type="secondary",
         use_container_width=True
     ):
-  st.session_state.previous_whys = current_whys.copy()
-st.session_state.whys_confirmed = True
-st.rerun()
+        st.session_state.previous_whys = current_whys.copy()
+        st.session_state.whys_confirmed = True
+        st.rerun()
 
 st.divider()
 st.header("Stage 4 — Countermeasures")
