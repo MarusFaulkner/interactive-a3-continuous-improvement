@@ -201,30 +201,30 @@ st.write(
 
 why_1 = st.text_area(
     f"Why 1 — Why is {specific_failure} occurring?",
-    placeholder="Enter the first potential cause..."
+    placeholder="Enter the first potential cause...",
     key="why_1"
 )
 
 why_2 = st.text_area(
     f'Why 2 — Why did "{why_1.strip()}" occur?',
-    placeholder="Investigate the cause behind Why 1..."
+    placeholder="Investigate the cause behind Why 1...",
     key="why_2"
 )
 
 why_3 = st.text_area(
     f'Why 3 — Why did "{why_2.strip()}" occur?',
-    placeholder="Investigate the cause behind Why 2..."
+    placeholder="Investigate the cause behind Why 2...",
     key="why_3"
 )
 
 why_4 = st.text_area(
     f'Why 4 — Why did "{why_3.strip()}" occur?',
-    placeholder="Investigate the cause behind Why 3..."
+    placeholder="Investigate the cause behind Why 3...",
 key="why_4"
 )
 
 why_5 = st.text_area(
     f'Why 5 — Why did "{why_4.strip()}" occur?',
-    placeholder="Investigate the cause behind Why 4..."
+    placeholder="Investigate the cause behind Why 4...",
     key="why_5"
 )
