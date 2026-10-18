@@ -289,3 +289,16 @@ if all([
     ):
         st.session_state.previous_whys = current_whys.copy()
         st.success("5 Whys chain confirmed and saved for flow validation.")
+
+st.divider()
+st.header("Stage 4 — Countermeasures")
+
+st.write(
+    "Develop countermeasures that directly address the potential root cause "
+    "identified during the 5 Whys analysis."
+)
+
+st.info(
+    "A strong countermeasure changes or controls the process. "
+    "Avoid actions that only address the symptom."
+)
