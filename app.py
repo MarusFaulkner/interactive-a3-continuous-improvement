@@ -168,3 +168,18 @@ st.write(
     f"Leading observed failure: **{leading_failure} "
     f"({leading_failure_count} failures)**"
 )
+
+st.divider()
+
+st.header("3. Root Cause Analysis — 5 Whys")
+
+st.write(
+    f"Investigate why **{leading_failure}** is occurring. "
+    "Each answer should be supported by process evidence before it is "
+    "treated as a confirmed cause."
+)
+
+why_1 = st.text_area(
+    "Why 1 — Why is the leading failure occurring?",
+    placeholder="Enter the first potential cause..."
+)
