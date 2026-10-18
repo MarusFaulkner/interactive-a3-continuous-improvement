@@ -200,6 +200,6 @@ st.write(
 )
 
 why_1 = st.text_area(
-    "Why 1 — Why is the leading failure occurring?",
+    f"Why 1 — Why is {specific_failure} occurring?",
     placeholder="Enter the first potential cause..."
 )
