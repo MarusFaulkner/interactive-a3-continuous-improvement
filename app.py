@@ -208,3 +208,8 @@ why_2 = st.text_area(
     f'Why 2 — Why did "{why_1.strip()}" occur?',
     placeholder="Investigate the cause behind Why 1..."
 )
+
+why_3 = st.text_area(
+    f'Why 3 — Why did "{why_2.strip()}" occur?',
+    placeholder="Investigate the cause behind Why 2..."
+)
