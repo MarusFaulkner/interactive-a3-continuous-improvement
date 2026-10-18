@@ -208,6 +208,8 @@ if "previous_whys" not in st.session_state:
         "why_4": "",
         "why_5": ""
     }
+if "whys_confirmed" not in st.session_state:
+    st.session_state.whys_confirmed = False
 why_1 = st.text_area(
     f"Why 1 — Why is {specific_failure} occurring?",
     placeholder="Enter the first potential cause...",
