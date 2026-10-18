@@ -143,6 +143,8 @@ failure_data = {
     "Cosmetic Defect": cosmetic_failures,
     "Labeling / Documentation Error": documentation_failures
 }
+leading_failure = max(failure_data, key=failure_data.get)
+
 failure_rate = (units_failed / units_inspected) * 100
 
 st.subheader("Observed Performance")
