@@ -199,6 +199,15 @@ st.write(
     "treated as a confirmed cause."
 )
 
+# Track previous 5 Whys answers for flow validation
+if "previous_whys" not in st.session_state:
+    st.session_state.previous_whys = {
+        "why_1": "",
+        "why_2": "",
+        "why_3": "",
+        "why_4": "",
+        "why_5": ""
+    }
 why_1 = st.text_area(
     f"Why 1 — Why is {specific_failure} occurring?",
     placeholder="Enter the first potential cause...",
