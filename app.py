@@ -145,6 +145,3 @@ st.metric(
     f"{failure_rate:.1f}%"
 )
 
-st.write(
-    f"Most common observed failure: **{failure_type}**"
-)
