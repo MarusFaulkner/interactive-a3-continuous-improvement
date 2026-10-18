@@ -245,9 +245,35 @@ current_whys = {
     "why_4": why_4,
     "why_5": why_5
 }
+earlier_why_changed = any(
+    st.session_state.previous_whys[key].strip()
+    and st.session_state.previous_whys[key] != current_whys[key]
+    for key in ["why_1", "why_2", "why_3", "why_4"]
+)
 st.divider()
 
 st.subheader("5 Whys Flow Validation")
+
+if not all([
+    why_1.strip(),
+    why_2.strip(),
+    why_3.strip(),
+    why_4.strip(),
+    why_5.strip()
+]):
+    st.warning(
+        "5 Whys analysis incomplete. Complete all five levels before identifying a potential root cause."
+    )
+
+elif earlier_why_changed:
+    st.warning(
+        "An earlier Why has changed. Review all downstream Why answers to verify the cause-and-effect chain is still valid."
+    )
+
+else:
+    st.success(
+        "All five Why levels are complete. Review the cause-and-effect chain before confirming the potential root cause."
+    )
 
 if all([
     why_1.strip(),
@@ -256,8 +282,6 @@ if all([
     why_4.strip(),
     why_5.strip()
 ]):
-    st.success("All five Why levels are complete. Review the cause-and-effect chain before confirming the potential root cause.")
-else:
-    st.warning(
-        "5 Whys analysis incomplete. Complete all five levels before identifying a potential root cause."
-    )
+    if st.button("Confirm 5 Whys Chain"):
+        st.session_state.previous_whys = current_whys.copy()
+        st.success("5 Whys chain confirmed and saved for flow validation.")
