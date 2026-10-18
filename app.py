@@ -154,3 +154,9 @@ st.metric(
     f"{failure_rate:.1f}%"
 )
 
+leading_failure_count = failure_data[leading_failure]
+
+st.write(
+    f"Leading observed failure: **{leading_failure} "
+    f"({leading_failure_count} failures)**"
+)
