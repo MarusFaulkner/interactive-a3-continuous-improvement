@@ -289,8 +289,9 @@ if all([
         type="secondary",
         use_container_width=True
     ):
-        st.session_state.previous_whys = current_whys.copy()
-        st.success("5 Whys chain confirmed and saved for flow validation.")
+  st.session_state.previous_whys = current_whys.copy()
+st.session_state.whys_confirmed = True
+st.rerun()
 
 st.divider()
 st.header("Stage 4 — Countermeasures")
@@ -305,8 +306,20 @@ st.info(
     "Avoid actions that only address the symptom."
 )
 
-countermeasure = st.text_area(
-    "Proposed Countermeasure",
-    placeholder="Describe an action that directly addresses the potential root cause...",
-    key="countermeasure"
-)
+if not st.session_state.whys_confirmed:
+    st.warning(
+        "Stage 4 is locked. Complete and confirm the 5 Whys analysis "
+        "before developing countermeasures."
+    )
+
+else:
+    st.success("5 Whys analysis confirmed. Stage 4 is unlocked.")
+
+    st.markdown("**Potential Root Cause**")
+    st.write(why_5)
+
+    countermeasure = st.text_area(
+        "Proposed Countermeasure",
+        placeholder="Describe an action that directly addresses the confirmed potential root cause...",
+        key="countermeasure"
+    )
