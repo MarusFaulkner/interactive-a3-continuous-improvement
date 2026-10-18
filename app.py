@@ -74,7 +74,15 @@ st.write(
     "attempting to identify the root cause."
 )
 
-
+device_under_test = st.selectbox(
+    "Device Under Test",
+    [
+        "Electrosurgical Generator",
+        "Patient Monitoring Device",
+        "Medical Imaging Controller",
+        "Surgical Energy Controller"
+    ]
+)
 
 col1, col2 = st.columns(2)
 
