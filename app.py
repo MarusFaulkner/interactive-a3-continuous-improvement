@@ -135,7 +135,14 @@ with col3:
         value=1,
         step=1
     )
- 
+
+failure_data = {
+    "Functional Test Failure": functional_failures,
+    "Connector Alignment Issue": connector_failures,
+    "Fastener Torque Failure": torque_failures,
+    "Cosmetic Defect": cosmetic_failures,
+    "Labeling / Documentation Error": documentation_failures
+}
 failure_rate = (units_failed / units_inspected) * 100
 
 st.subheader("Observed Performance")
