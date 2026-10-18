@@ -228,3 +228,20 @@ why_5 = st.text_area(
     placeholder="Investigate the cause behind Why 4...",
     key="why_5"
 )
+
+st.divider()
+
+st.subheader("5 Whys Flow Validation")
+
+if all([
+    why_1.strip(),
+    why_2.strip(),
+    why_3.strip(),
+    why_4.strip(),
+    why_5.strip()
+]):
+    st.success("All five Why levels are complete. Review the cause-and-effect chain before confirming the potential root cause.")
+else:
+    st.warning(
+        "5 Whys analysis incomplete. Complete all five levels before identifying a potential root cause."
+    )
