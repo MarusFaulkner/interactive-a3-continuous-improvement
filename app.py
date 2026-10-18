@@ -283,9 +283,9 @@ if all([
     why_5.strip()
 ]):
     if st.button(
-    "Confirm 5 Whys Chain",
-    type="primary",
-    use_container_width=True
-):
-    st.session_state.previous_whys = current_whys.copy()
-    st.success("5 Whys chain confirmed and saved for flow validation.")
+        "Confirm 5 Whys Chain",
+        type="primary",
+        use_container_width=True
+    ):
+        st.session_state.previous_whys = current_whys.copy()
+        st.success("5 Whys chain confirmed and saved for flow validation.")
