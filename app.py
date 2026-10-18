@@ -194,7 +194,7 @@ st.divider()
 st.header("3. Root Cause Analysis — 5 Whys")
 
 st.write(
-    f"Investigate why **{leading_failure}** is occurring. "
+    f"Investigate why **{specific_failure}** is occurring. "
     "Each answer should be supported by process evidence before it is "
     "treated as a confirmed cause."
 )
@@ -202,4 +202,9 @@ st.write(
 why_1 = st.text_area(
     f"Why 1 — Why is {specific_failure} occurring?",
     placeholder="Enter the first potential cause..."
+)
+
+why_2 = st.text_area(
+    "Why 2 — Why did the condition identified in Why 1 occur?",
+    placeholder="Investigate the cause behind Why 1..."
 )
