@@ -244,26 +244,50 @@ why_1 = st.text_area(
     key="why_1"
 )
 
+why_2_label = (
+    f'Why 2 — Why did "{why_1.strip()}" occur?'
+    if why_1.strip()
+    else "Why 2 — Why did the cause above occur?"
+)
+
 why_2 = st.text_area(
-    f'Why 2 — Why did "{why_1.strip()}" occur?',
+    why_2_label,
     placeholder="Investigate the cause behind Why 1...",
     key="why_2"
 )
 
+why_3_label = (
+    f'Why 3 — Why did "{why_2.strip()}" occur?'
+    if why_2.strip()
+    else "Why 3 — Why did the cause above occur?"
+)
+
 why_3 = st.text_area(
-    f'Why 3 — Why did "{why_2.strip()}" occur?',
+    why_3_label,
     placeholder="Investigate the cause behind Why 2...",
     key="why_3"
 )
 
+why_4_label = (
+    f'Why 4 — Why did "{why_3.strip()}" occur?'
+    if why_3.strip()
+    else "Why 4 — Why did the cause above occur?"
+)
+
 why_4 = st.text_area(
-    f'Why 4 — Why did "{why_3.strip()}" occur?',
+    why_4_label,
     placeholder="Investigate the cause behind Why 3...",
     key="why_4"
 )
 
+why_5_label = (
+    f'Why 5 — Why did "{why_4.strip()}" occur?'
+    if why_4.strip()
+    else "Why 5 — Why did the cause above occur?"
+)
+
 why_5 = st.text_area(
-    f'Why 5 — Why did "{why_4.strip()}" occur?',
+    why_5_label,
     placeholder="Investigate the cause behind Why 4...",
     key="why_5"
 )
