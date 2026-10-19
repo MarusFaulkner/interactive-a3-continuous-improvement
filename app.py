@@ -131,9 +131,14 @@ with col2:
     units_failed = st.number_input(
         "Units Failed",
         min_value=0,
-        max_value=units_inspected,
-        value=min(18, units_inspected),
+        value=18,
         step=1
+    )
+
+if units_failed > units_inspected:
+    st.error(
+        "Units Failed cannot exceed Units Inspected. "
+        "Review the inspection counts before continuing."
     )
 
 st.subheader("Failure Data")
