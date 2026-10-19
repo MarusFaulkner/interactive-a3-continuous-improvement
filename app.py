@@ -421,3 +421,91 @@ else:
         st.success(
             "Countermeasure implemented. Ready for effectiveness verification."
         )
+
+# --------------------------------------------------
+# Stage 5 — Effectiveness Verification
+# --------------------------------------------------
+
+st.divider()
+st.header("Stage 5 — Effectiveness Verification")
+
+st.write(
+    "Verify whether the implemented countermeasure improved process performance "
+    "and achieved the original first-pass yield target."
+)
+
+countermeasure_ready = (
+    analysis_confirmed
+    and countermeasure.strip()
+    and action_owner.strip()
+    and implementation_status == "Implemented"
+)
+
+if not countermeasure_ready:
+    st.warning(
+        "Stage 5 is locked. Confirm the analysis and complete implementation "
+        "of the countermeasure before verifying effectiveness."
+    )
+
+else:
+    st.success(
+        "Countermeasure implemented. Effectiveness verification is unlocked."
+    )
+
+    post_units_inspected = st.number_input(
+        "Post-Implementation Units Inspected",
+        min_value=1,
+        value=100,
+        step=1,
+        key="post_units_inspected"
+    )
+
+    post_units_failed = st.number_input(
+        "Post-Implementation Units Failed",
+        min_value=0,
+        value=2,
+        step=1,
+        key="post_units_failed"
+    )
+
+    if post_units_failed > post_units_inspected:
+        st.error(
+            "Post-Implementation Units Failed cannot exceed "
+            "Post-Implementation Units Inspected."
+        )
+
+    else:
+        post_fpy = (
+            (post_units_inspected - post_units_failed)
+            / post_units_inspected
+        ) * 100
+
+        st.metric(
+            "Post-Implementation First-Pass Yield",
+            f"{post_fpy:.1f}%"
+        )
+
+        st.write(f"**Original FPY:** {current_fpy:.1f}%")
+        st.write(f"**Target FPY:** {target_fpy:.1f}%")
+
+        verification_notes = st.text_area(
+            "Effectiveness Verification Notes",
+            placeholder=(
+                "Describe the post-implementation results "
+                "and any relevant observations..."
+            ),
+            key="verification_notes"
+        )
+
+        st.subheader("A3 Disposition")
+
+        if post_fpy >= target_fpy:
+            st.success(
+                "Effectiveness verified. The FPY target has been achieved. "
+                "The A3 may be closed."
+            )
+        else:
+            st.warning(
+                "Effectiveness has not been verified. The FPY target has not "
+                "been achieved. Continue the investigation or revise the countermeasure."
+            )
