@@ -131,7 +131,8 @@ with col2:
     units_failed = st.number_input(
         "Units Failed",
         min_value=0,
-        value=18,
+        max_value=units_inspected,
+        value=min(18, units_inspected),
         step=1
     )
 
@@ -192,8 +193,6 @@ if categorized_failures != units_failed:
         f"Failure count mismatch: {categorized_failures} categorized failures "
         f"do not match {units_failed} total units failed."
     )
-leading_failure = max(failure_data, key=failure_data.get)
-
 failure_rate = (units_failed / units_inspected) * 100
 
 st.subheader("Observed Performance")
@@ -203,12 +202,18 @@ st.metric(
     f"{failure_rate:.1f}%"
 )
 
-leading_failure_count = failure_data[leading_failure]
+if categorized_failures > 0:
+    leading_failure = max(failure_data, key=failure_data.get)
+    leading_failure_count = failure_data[leading_failure]
 
-st.write(
-    f"Leading observed failure: **{leading_failure} "
-    f"({leading_failure_count} failures)**"
-)
+    st.write(
+        f"Leading observed failure: **{leading_failure} "
+        f"({leading_failure_count} failures)**"
+    )
+else:
+    st.info(
+        "No categorized failures have been recorded."
+    )
 
 st.divider()
 
