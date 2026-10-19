@@ -199,17 +199,11 @@ st.write(
     "treated as a confirmed cause."
 )
 
-# Track previous 5 Whys answers for flow validation
-if "previous_whys" not in st.session_state:
-    st.session_state.previous_whys = {
-        "why_1": "",
-        "why_2": "",
-        "why_3": "",
-        "why_4": "",
-        "why_5": ""
-    }
-if "whys_confirmed" not in st.session_state:
-    st.session_state.whys_confirmed = False
+# Store the last confirmed A3 analysis as a snapshot
+if "confirmed_analysis" not in st.session_state:
+    st.session_state.confirmed_analysis = None
+
+
 why_1 = st.text_area(
     f"Why 1 — Why is {specific_failure} occurring?",
     placeholder="Enter the first potential cause...",
@@ -231,7 +225,7 @@ why_3 = st.text_area(
 why_4 = st.text_area(
     f'Why 4 — Why did "{why_3.strip()}" occur?',
     placeholder="Investigate the cause behind Why 3...",
-key="why_4"
+    key="why_4"
 )
 
 why_5 = st.text_area(
@@ -240,61 +234,85 @@ why_5 = st.text_area(
     key="why_5"
 )
 
-current_whys = {
-    "why_1": why_1,
-    "why_2": why_2,
-    "why_3": why_3,
-    "why_4": why_4,
-    "why_5": why_5
+
+# Current A3 analysis
+current_analysis = {
+    "device": device_under_test,
+    "failure": specific_failure,
+    "why_1": why_1.strip(),
+    "why_2": why_2.strip(),
+    "why_3": why_3.strip(),
+    "why_4": why_4.strip(),
+    "why_5": why_5.strip()
 }
-earlier_why_changed = any(
-    st.session_state.previous_whys[key].strip()
-    and st.session_state.previous_whys[key] != current_whys[key]
-    for key in ["why_1", "why_2", "why_3", "why_4"]
+
+
+# All five Why levels must contain an answer
+whys_complete = all([
+    current_analysis["why_1"],
+    current_analysis["why_2"],
+    current_analysis["why_3"],
+    current_analysis["why_4"],
+    current_analysis["why_5"]
+])
+
+
+# The analysis is valid only when the current problem and all five Whys
+# exactly match the snapshot that was confirmed.
+analysis_confirmed = (
+    st.session_state.confirmed_analysis is not None
+    and st.session_state.confirmed_analysis == current_analysis
 )
-if earlier_why_changed:
-    st.session_state.whys_confirmed = False
+
+
+# Determine whether a previously confirmed analysis has changed
+analysis_changed = (
+    st.session_state.confirmed_analysis is not None
+    and st.session_state.confirmed_analysis != current_analysis
+)
+
+
 st.divider()
 
 st.subheader("5 Whys Flow Validation")
 
-if not all([
-    why_1.strip(),
-    why_2.strip(),
-    why_3.strip(),
-    why_4.strip(),
-    why_5.strip()
-]):
+
+if not whys_complete:
     st.warning(
-        "5 Whys analysis incomplete. Complete all five levels before identifying a potential root cause."
+        "5 Whys analysis incomplete. Complete all five levels before "
+        "identifying a potential root cause."
     )
 
-elif earlier_why_changed:
+elif analysis_confirmed:
+    st.success(
+        "5 Whys analysis confirmed. The current device, failure mode, "
+        "and causal chain match the confirmed analysis."
+    )
+
+elif analysis_changed:
     st.warning(
-        "An earlier Why has changed. Review all downstream Why answers to verify the cause-and-effect chain is still valid."
+        "The problem context or 5 Whys chain has changed since confirmation. "
+        "Review the analysis and confirm it again before developing "
+        "countermeasures."
     )
 
 else:
     st.success(
-        "All five Why levels are complete. Review the cause-and-effect chain before confirming the potential root cause."
+        "All five Why levels are complete. Review the cause-and-effect "
+        "chain before confirming the potential root cause."
     )
 
-if all([
-    why_1.strip(),
-    why_2.strip(),
-    why_3.strip(),
-    why_4.strip(),
-    why_5.strip()
-]):
-       if st.button(
+
+# Confirmation is available whenever all five Why levels are complete
+# and the current analysis is not already confirmed.
+if whys_complete and not analysis_confirmed:
+    if st.button(
         "Confirm 5 Whys Chain",
         type="secondary",
         use_container_width=True
     ):
-        st.session_state.previous_whys = current_whys.copy()
-        st.session_state.whys_confirmed = True
+        st.session_state.confirmed_analysis = current_analysis.copy()
         st.rerun()
-
 st.divider()
 st.header("Stage 4 — Countermeasures")
 
@@ -308,7 +326,7 @@ st.info(
     "Avoid actions that only address the symptom."
 )
 
-if not st.session_state.whys_confirmed:
+if not analysis_confirmed:
     st.warning(
         "Stage 4 is locked. Complete and confirm the 5 Whys analysis "
         "before developing countermeasures."
