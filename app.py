@@ -140,6 +140,7 @@ if units_failed > units_inspected:
         "Units Failed cannot exceed Units Inspected. "
         "Review the inspection counts before continuing."
     )
+    st.stop()
 
 st.subheader("Failure Data")
 
