@@ -360,8 +360,6 @@ st.info(
 
 if not analysis_confirmed:
     st.warning(
-if not analysis_confirmed:
-    st.warning(
         "Stage 4 is locked. Complete and confirm the 5 Whys analysis "
         "before developing countermeasures."
     )
