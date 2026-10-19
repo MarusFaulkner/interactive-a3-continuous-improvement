@@ -2,6 +2,12 @@
 
 An interactive Streamlit application demonstrating A3 problem-solving, root cause analysis, countermeasure development, and effectiveness verification using a synthetic medical-device manufacturing scenario.
 
+🚀 **Live App:** [Launch the Interactive A3 Continuous Improvement App](https://interactive-a3-continuous-improvement-ctwpp7k9smpmaptayvphkl.streamlit.app/)
+
+## Application Preview
+
+![Interactive A3 Continuous Improvement App](images/a3-app-preview.png)
+
 ## Overview
 
 This project demonstrates how manufacturing quality concepts can be translated into an interactive Python workflow.
