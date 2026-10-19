@@ -370,51 +370,51 @@ else:
     st.markdown("**Potential Root Cause**")
     st.write(why_5)
 
-      countermeasure = st.text_area(
-        "Proposed Countermeasure",
-        placeholder="Describe an action that directly addresses the confirmed potential root cause...",
-        key="countermeasure"
+  countermeasure = st.text_area(
+    "Proposed Countermeasure",
+    placeholder="Describe an action that directly addresses the confirmed potential root cause...",
+    key="countermeasure"
+)
+
+action_owner = st.text_input(
+    "Action Owner",
+    placeholder="Enter the person or role responsible for implementation...",
+    key="action_owner"
+)
+
+due_date = st.date_input(
+    "Target Completion Date",
+    key="due_date"
+)
+
+implementation_status = st.selectbox(
+    "Implementation Status",
+    [
+        "Not Started",
+        "In Progress",
+        "Implemented"
+    ],
+    key="implementation_status"
+)
+
+st.subheader("Countermeasure Readiness")
+
+if not countermeasure.strip():
+    st.warning(
+        "Enter a countermeasure that addresses the confirmed potential root cause."
     )
 
-    action_owner = st.text_input(
-        "Action Owner",
-        placeholder="Enter the person or role responsible for implementation...",
-        key="action_owner"
+elif not action_owner.strip():
+    st.warning(
+        "Assign an action owner before proceeding."
     )
 
-    due_date = st.date_input(
-        "Target Completion Date",
-        key="due_date"
+elif implementation_status != "Implemented":
+    st.info(
+        "Countermeasure action plan recorded. Complete implementation before effectiveness verification."
     )
 
-    implementation_status = st.selectbox(
-        "Implementation Status",
-        [
-            "Not Started",
-            "In Progress",
-            "Implemented"
-        ],
-        key="implementation_status"
+else:
+    st.success(
+        "Countermeasure implemented. Ready for effectiveness verification."
     )
-
-    st.subheader("Countermeasure Readiness")
-
-    if not countermeasure.strip():
-        st.warning(
-            "Enter a countermeasure that addresses the confirmed potential root cause."
-        )
-
-    elif not action_owner.strip():
-        st.warning(
-            "Assign an action owner before proceeding."
-        )
-
-    elif implementation_status != "Implemented":
-        st.info(
-            "Countermeasure action plan recorded. Complete implementation before effectiveness verification."
-        )
-
-    else:
-        st.success(
-            "Countermeasure implemented. Ready for effectiveness verification."
-        )
