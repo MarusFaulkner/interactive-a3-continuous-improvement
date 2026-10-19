@@ -235,6 +235,8 @@ st.write(
 if "confirmed_analysis" not in st.session_state:
     st.session_state.confirmed_analysis = None
 
+if "confirmation_voided" not in st.session_state:
+    st.session_state.confirmation_voided = False
 
 why_1 = st.text_area(
     f"Why 1 — Why is {specific_failure} occurring?",
@@ -288,20 +290,20 @@ whys_complete = all([
     current_analysis["why_5"]
 ])
 
+# Strict change control:
+# Any change to a confirmed analysis voids the confirmation.
+# Restoring the original values does not restore approval.
+snapshot = st.session_state.confirmed_analysis
 
-# The analysis is valid only when the current problem and all five Whys
-# exactly match the snapshot that was confirmed.
+if snapshot is not None and snapshot != current_analysis:
+    st.session_state.confirmed_analysis = None
+    st.session_state.confirmation_voided = True
+
 analysis_confirmed = (
-    st.session_state.confirmed_analysis is not None
-    and st.session_state.confirmed_analysis == current_analysis
+    st.session_state.confirmed_analysis == current_analysis
 )
 
-
-# Determine whether a previously confirmed analysis has changed
-analysis_changed = (
-    st.session_state.confirmed_analysis is not None
-    and st.session_state.confirmed_analysis != current_analysis
-)
+analysis_changed = st.session_state.confirmation_voided
 
 
 st.divider()
@@ -344,6 +346,7 @@ if whys_complete and not analysis_confirmed:
         use_container_width=True
     ):
         st.session_state.confirmed_analysis = current_analysis.copy()
+        st.session_state.confirmation_voided = False
         st.rerun()
 st.divider()
 st.header("Stage 4 — Countermeasures")
