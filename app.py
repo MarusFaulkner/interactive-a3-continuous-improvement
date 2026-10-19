@@ -74,19 +74,9 @@ st.write(
     "attempting to identify the root cause."
 )
 
-device_under_test = st.selectbox(
-    "Device Under Test",
-    [
-        "Electrosurgical Generator",
-        "Patient Monitoring Device",
-        "Medical Imaging Controller",
-        "Surgical Energy Controller"
-    ]
-)
-
-specific_failure = st.selectbox(
-    "Specific Functional Failure",
-    [
+# Define valid functional failures for each synthetic device
+device_failures = {
+    "Electrosurgical Generator": [
         "Monopolar Output Failure",
         "Bipolar Output Failure",
         "Neutral Electrode Interface Failure",
@@ -94,7 +84,38 @@ specific_failure = st.selectbox(
         "Output Power Below Specification",
         "Output Power Above Specification",
         "Spark Test Failure"
+    ],
+    "Patient Monitoring Device": [
+        "Sensor Input Failure",
+        "Alarm Function Failure",
+        "Display Failure",
+        "Communication Failure",
+        "Power Failure"
+    ],
+    "Medical Imaging Controller": [
+        "Image Output Failure",
+        "Control Interface Failure",
+        "Communication Failure",
+        "Cable / Connection Failure",
+        "Power Failure"
+    ],
+    "Surgical Energy Controller": [
+        "Energy Delivery Failure",
+        "Control Interface Failure",
+        "Cable / Connection Failure",
+        "Output Power Below Specification",
+        "Output Power Above Specification"
     ]
+}
+
+device_under_test = st.selectbox(
+    "Device Under Test",
+    list(device_failures.keys())
+)
+
+specific_failure = st.selectbox(
+    "Specific Functional Failure",
+    device_failures[device_under_test]
 )
 col1, col2 = st.columns(2)
 
