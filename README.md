@@ -2,7 +2,7 @@
 
 An interactive Streamlit application demonstrating A3 problem-solving, root cause analysis, countermeasure development, and effectiveness verification using a synthetic medical-device manufacturing scenario.
 
-🚀 **Live App:** [Launch the Interactive A3 Continuous Improvement App](https://interactive-a3-continuous-improvement-ctwpp7k9smpmaptayvphkl.streamlit.app/)
+🚀 **Live App:** [Launch the Interactive A3 Continuous Improvement App](https://interactive-a3-continuous-improvement.streamlit.app/)
 
 ## Application Preview
 
