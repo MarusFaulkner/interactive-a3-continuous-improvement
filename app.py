@@ -367,7 +367,7 @@ if whys_complete and not analysis_confirmed:
     if st.button(
         "Confirm 5 Whys Chain",
         type="secondary",
-        use_container_width=True
+        width="stretch"
     ):
         st.session_state.confirmed_analysis = current_analysis.copy()
         st.session_state.confirmation_voided = False
